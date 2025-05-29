@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects – My Professional Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Container Styles */
+    .project-group {
+      margin: 2rem auto;
+      max-width: 900px;
+      background-color: var(--secondary-color);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .project-group.stats { border-top: 4px solid #FF6B6B; }
+    .project-group.cs    { border-top: 4px solid #4ECDC4; }
+    .project-group h2 {
+      margin-top: 0;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    /* Slideshow within group */
+    .slideshow-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .stats .slide img { border: 3px solid #FF6B6B; }
+    .cs    .slide img { border: 3px solid #4ECDC4; }
+    .prev, .next { color: var(--text-color); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Projects</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section>
+    <!-- Statistics Projects -->
+    <div class="project-group stats">
+      <h2>Statistics Projects</h2>
+      <div class="slideshow-container">
+        <div class="slide">
+          <a href="#" target="_blank">
+            <img src="stats1.png" alt="Data Analysis Project">
+          </a>
+          <p>A deep dive into exploratory data analysis and visualization.</p>
+        </div>
+        <div class="slide">
+          <a href="#" target="_blank">
+            <img src="stats2.png" alt="Statistical Model">
+          </a>
+          <p>Building predictive models using regression and hypothesis testing.</p>
+        </div>
+        <!-- navigation -->
+        <div class="prev" onclick="changeSlide(-1, 'stats')">&#10094;</div>
+        <div class="next" onclick="changeSlide(1, 'stats')">&#10095;</div>
+      </div>
+    </div>
+
+    <!-- Computer Science Projects -->
+    <div class="project-group cs">
+      <h2>Computer Science Projects</h2>
+      <div class="slideshow-container">
+        <div class="slide">
+          <a href="https://github.com/yourusername/movie-review-app" target="_blank">
+            <img src="project1.png" alt="Movie Review App">
+          </a>
+          <p>Flask-based Movie Review App with full CRUD functionality.</p>
+        </div>
+        <div class="slide">
+          <a href="https://github.com/yourusername/portfolio-website" target="_blank">
+            <img src="project3.png" alt="Portfolio Website">
+          </a>
+          <p>Modern personal portfolio with JavaScript interactivity.</p>
+        </div>
+        <!-- navigation -->
+        <div class="prev" onclick="changeSlide(-1, 'cs')">&#10094;</div>
+        <div class="next" onclick="changeSlide(1, 'cs')">&#10095;</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 Tam Hoang Nguyen</footer>
+
+  <script>
+    const indices = { stats: 1, cs: 1 };
+    showSlide(indices.stats, 'stats');
+    showSlide(indices.cs,   'cs');
+
+    function changeSlide(n, group) {
+      indices[group] += n;
+      showSlide(indices[group], group);
+    }
+    function showSlide(n, group) {
+      const container = document.querySelector(`.project-group.${group}`);
+      const slides = container.getElementsByClassName('slide');
+      if (n > slides.length) indices[group] = 1;
+      if (n < 1) indices[group] = slides.length;
+      for (let s of slides) s.style.display = 'none';
+      slides[indices[group]-1].style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact – My Professional Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Contact</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+
+  <section>
+    <h2>Get In Touch</h2>
+    <form id="contactForm" action="https://formspree.io/f/xeokjjpo" method="POST">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="_replyto" required><br><br>
+
+      <label for="subject">Subject:</label><br>
+      <input type="text" id="subject" name="subject" required><br><br>
+
+      <label for="message">Message:</label><br>
+      <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formMessage"></p>
+  </section>
+
+  <footer>© 2025 Tam Hoang Nguyen</footer>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      }).then(response => {
+        if (response.ok) {
+          formMessage.textContent = 'Thank you, ' + formData.get('name') + '! Your message has been sent. I will get back to you as soon as possible!';
+          contactForm.reset();
+        } else {
+          response.json().then(data => {
+            formMessage.textContent = data.error || 'Oops! There was a problem sending your message.';
+          });
+        }
+      }).catch(() => {
+        formMessage.textContent = 'Network error: unable to send message.';
+      });
+    });
+  </script>
+</body>
+</html>
