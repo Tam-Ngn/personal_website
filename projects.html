@@ -139,7 +139,7 @@
           </a>
           <div class="project-title">Tumor Classification</div>
           <div class="project-description">
-            A deep dive into exploratory data analysis and visualization.<br>
+            <br> This project investigates the application of several machine learning algorithms—including K-Nearest Neighbors (KNN), Lasso regression, and Support Vector Machines (SVM)—to the task of tumor classification, with the aim of evaluating their relative performance and suitability for biomedical data..<br>
             <a href="https://html-starter-bv3d.vercel.app/" target="_blank">View Report</a>
           </div>
         </div>
@@ -220,5 +220,36 @@
       slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
   </script>
+
+
+<!-- <script>
+  function scrollSlider(id, direction) {
+    const slider = document.getElementById(id);
+    const scrollAmount = 270;
+    const start = slider.scrollLeft;
+    const end = start + direction * scrollAmount;
+    const duration = 400; // milliseconds
+    const startTime = performance.now();
+
+    function animateScroll(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1); // cap at 1
+      const ease = easeInOutQuad(progress);
+      slider.scrollLeft = start + (end - start) * ease;
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    }
+
+    requestAnimationFrame(animateScroll);
+  }
+
+  // Easing function (easeInOutQuad)
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+</script> -->
+
 </body>
 </html>
