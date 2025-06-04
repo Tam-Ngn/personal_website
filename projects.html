@@ -5,34 +5,114 @@
   <title>Projects – My Professional Portfolio</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Container Styles */
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--accent-color);
+    }
+
+    nav .active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
     .project-group {
       margin: 2rem auto;
-      max-width: 900px;
+      max-width: 1000px;
       background-color: var(--secondary-color);
       border-radius: var(--border-radius);
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       padding: 1rem;
+      overflow: hidden;
       position: relative;
-      z-index: 1;
     }
+
     .project-group.stats { border-top: 4px solid #FF6B6B; }
     .project-group.cs    { border-top: 4px solid #4ECDC4; }
+
     .project-group h2 {
       margin-top: 0;
       color: var(--accent-color);
       font-size: 1.5rem;
+    }
+
+    .project-slider {
       display: flex;
-      align-items: center;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 10px 0;
     }
-    /* Slideshow within group */
-    .slideshow-container {
-      position: relative;
+
+    .project-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .project-card {
+      min-width: 250px;
+      max-width: 250px;
+      flex-shrink: 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      background-color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
-    .stats .slide img { border: 3px solid #FF6B6B; }
-    .cs    .slide img { border: 3px solid #4ECDC4; }
-    .prev, .next { color: var(--text-color); }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .project-description {
+      padding: 0 10px 10px 10px;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      background-color: rgba(255,255,255,0.8);
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .slider-prev {
+      left: 10px;
+    }
+
+    .slider-next {
+      right: 10px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #999;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -50,66 +130,94 @@
     <!-- Statistics Projects -->
     <div class="project-group stats">
       <h2>Statistics Projects</h2>
-      <div class="slideshow-container">
-        <div class="slide">
-          <a href="#" target="_blank">
-            <img src="stats1.png" alt="Data Analysis Project">
+      <button class="slider-nav slider-prev" onclick="scrollSlider('stats-slider', -1)">&#10094;</button>
+      <div class="project-slider" id="stats-slider">
+        
+        <div class="project-card">
+          <a href="https://github.com/Tam-Ngn/stat_gen_2025" target="_blank">
+            <img src="images/lab_schaid_main_image-8col.jpg" alt="Tumor Classification" class="project-image">
           </a>
-          <p>A deep dive into exploratory data analysis and visualization.</p>
+          <div class="project-title">Tumor Classification</div>
+          <div class="project-description">
+            A deep dive into exploratory data analysis and visualization.<br>
+            <a href="https://html-starter-bv3d.vercel.app/" target="_blank">View Report</a>
+          </div>
         </div>
-        <div class="slide">
-          <a href="#" target="_blank">
-            <img src="stats2.png" alt="Statistical Model">
-          </a>
-          <p>Building predictive models using regression and hypothesis testing.</p>
+
+        <div class="project-card">
+          <img src="stats2.png" alt="Statistical Model" class="project-image">
+          <div class="project-title">Predictive Modeling</div>
+          <div class="project-description">
+            Building predictive models using regression and hypothesis testing.
+          </div>
         </div>
-        <!-- navigation -->
-        <div class="prev" onclick="changeSlide(-1, 'stats')">&#10094;</div>
-        <div class="next" onclick="changeSlide(1, 'stats')">&#10095;</div>
+        
+        <div class="project-card">
+          <img src="stats2.png" alt="Statistical Model" class="project-image">
+          <div class="project-title">Predictive Modeling</div>
+          <div class="project-description">
+            Building predictive models using regression and hypothesis testing.
+          </div>
+        </div>
+
+
+        <div class="project-card">
+          <img src="stats2.png" alt="Statistical Model" class="project-image">
+          <div class="project-title">Predictive Modeling</div>
+          <div class="project-description">
+            Building predictive models using regression and hypothesis testing.
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="stats2.png" alt="Statistical Model" class="project-image">
+          <div class="project-title">Predictive Modeling</div>
+          <div class="project-description">
+            Building predictive models using regression and hypothesis testing.
+          </div>
+        </div>
+
+
       </div>
+      <button class="slider-nav slider-next" onclick="scrollSlider('stats-slider', 1)">&#10095;</button>
     </div>
 
     <!-- Computer Science Projects -->
     <div class="project-group cs">
       <h2>Computer Science Projects</h2>
-      <div class="slideshow-container">
-        <div class="slide">
-          <a href="https://github.com/yourusername/movie-review-app" target="_blank">
-            <img src="project1.png" alt="Movie Review App">
+      <button class="slider-nav slider-prev" onclick="scrollSlider('cs-slider', -1)">&#10094;</button>
+      <div class="project-slider" id="cs-slider">
+        <div class="project-card">
+          <a href="https://github.com/bram-n/internet-computing-project/tree/main" target="_blank">
+            <img src="project1.png" alt="Movie Review App" class="project-image">
           </a>
-          <p>Flask-based Movie Review App with full CRUD functionality.</p>
+          <div class="project-title">Movie Review App</div>
+          <div class="project-description">
+            Flask-based Movie Review App with full CRUD functionality.
+          </div>
         </div>
-        <div class="slide">
+
+        <div class="project-card">
           <a href="https://github.com/yourusername/portfolio-website" target="_blank">
-            <img src="project3.png" alt="Portfolio Website">
+            <img src="project3.png" alt="Portfolio Website" class="project-image">
           </a>
-          <p>Modern personal portfolio with JavaScript interactivity.</p>
+          <div class="project-title">Portfolio Website</div>
+          <div class="project-description">
+            Modern personal portfolio with JavaScript interactivity.
+          </div>
         </div>
-        <!-- navigation -->
-        <div class="prev" onclick="changeSlide(-1, 'cs')">&#10094;</div>
-        <div class="next" onclick="changeSlide(1, 'cs')">&#10095;</div>
       </div>
+      <button class="slider-nav slider-next" onclick="scrollSlider('cs-slider', 1)">&#10095;</button>
     </div>
   </section>
 
   <footer>© 2025 Tam Hoang Nguyen</footer>
 
   <script>
-    const indices = { stats: 1, cs: 1 };
-    showSlide(indices.stats, 'stats');
-    showSlide(indices.cs,   'cs');
-
-    function changeSlide(n, group) {
-      indices[group] += n;
-      showSlide(indices[group], group);
-    }
-    function showSlide(n, group) {
-      const container = document.querySelector(`.project-group.${group}`);
-      const slides = container.getElementsByClassName('slide');
-      if (n > slides.length) indices[group] = 1;
-      if (n < 1) indices[group] = slides.length;
-      for (let s of slides) s.style.display = 'none';
-      slides[indices[group]-1].style.display = 'block';
+    function scrollSlider(id, direction) {
+      const slider = document.getElementById(id);
+      const scrollAmount = 270; // width of one card + gap
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
   </script>
 </body>
